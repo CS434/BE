@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Thêm thư viện Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Thêm thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Thêm thư viện Slick Slider -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <!-- Option 1: Include in HTML -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <style>
+        /* Reset CSS */
+
+        /* Box sizing */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* Remove default margin and padding */
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        ol,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Remove list styles */
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        /* Remove default anchor styles */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Reset form elements */
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        /* Reset images */
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        * {
+            font-family: "Poppins", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+            transition: all 0.3s ease;
+        }
+
+        .navigation {
+            width: 100%;
+            height: 84px;
+            background-color: white;
+            border-bottom: 1px solid #EAEAEA;
+            position: fixed;
+            top: 0;
+        }
+
+        .wrap-content-nav {
+            width: 1400px;
+            height: 84px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: auto auto;
+        }
+
+        .wrap-icon-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 170px;
+            height: 100%;
+        }
+
+        .wrap-icon-text div h2 {
+            color: #F48023;
+            margin: 0;
+        }
+
+        .Sidebar {
+            z-index: 100;
+            position: fixed;
+            top: 84px;
+            width: 350px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: white;
+            border-right: 1px solid #EAEAEA;
+        }
+
+        .ip-text {
+            padding: 5px 5px;
+        }
+
+        .ip-text:focus {
+            outline: none;
+        }
+
+        .menu-task {
+            border-top: 1px solid #EAEAEA;
+            border-left: 4px solid white;
+            padding: 15px 0 15px 90px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-task:hover {
+            background-color: #FCF4EC;
+            border-left: 4px solid #F48023;
+            color: #F48023;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+        }
+
+        .dropdown-content div a {
+            border-top: 1px solid #EAEAEA;
+            border-left: 4px solid white;
+            padding: 15px 0 15px 115px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-content div a:hover {
+            background-color: #FCF4EC;
+            border-left: 4px solid #F48023;
+            color: #F48023;
+            cursor: pointer;
+        }
+
+        .icon-contact {
+            font-size: 25px;
+            padding-left: 80px;
+            margin-bottom: 100px;
+        }
+
+        .icon-contact a i {
+            padding: 7px;
+        }
+
+        .Post {
+            width: 100%;
+            height: auto;
+            background-color: rgb(250, 250, 250);
+        }
+
+        .wrap-post {
+            width: 1330px;
+            padding: 20px;
+            height: auto;
+            margin: 0px 50px 100px 350px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        .breadcrumb{
+            width: 1100px;
+            padding: 20px;
+            margin: 84px 50px 10px 350px;
+            padding-bottom: 0 !important;
+        }
+
+        .main-post {
+            width: 920px;
+            height: auto;
+            background-color: white;
+            border-color: #EAEAEA;
+            border-radius: 5px;
+            box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .main-comment {
+            width: 920px;
+            height: auto;
+        }
+
+        .main-info-author{
+            width: 300px;
+            height: 350px;
+            background-color: white;
+            border-color: #EAEAEA;
+            border-radius: 5px;
+            box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+
+        .st_cate {
+            color: #808080;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.50px;
+            word-wrap: break-word;
+            padding: 5px 10px;
+            background: #EAEAEA;
+            border-radius: 5px;
+        }
+
+        .icon-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+
+        .icon-number .st-i-func {
+            margin-right: 5px;
+            font-size: 25px;
+        }
+
+        .wrap-btn {
+            position: relative;
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .avt_func div img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .wrap-drop-personal {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 70%;
+            background-color: white;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            width: 200px;
+        }
+
+        .wrap-drop-personal a {
+            color: black;
+            border-left: 4px solid white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .wrap-drop-personal a:hover {
+            background-color: #FCF4EC;
+            border-left: 4px solid #F48023;
+            color: #F48023;
+        }
+
+        .avt_func:hover .wrap-drop-personal {
+            display: block;
+        }
+
+        .wrap-btn button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #F48023;
+            color: white;
+        }
+
+        .st_modal {
+            max-width: 80%;
+            width: 80%;
+        }
+
+        .st_modal_content {
+            height: 80vh;
+        }
+
+        @media (max-width: 768px) {
+            .st_modal {
+                max-width: 90%;
+                width: 90%;
+            }
+
+            .st_modal_content {
+                height: auto;
+            }
+        }
+
+        .btn{
+            padding: 10px 20px !important;
+            border-radius: 5px !important;
+            background-color: #F48023 !important;
+            color: white !important;
+        }
+
+        .main-info-author img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+
+        .st_info_icon {
+            padding: 10px;
+        }
+
+        .st_info_icon a i {
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .main_post_comment {
+            background-color: white;
+            border-color: #EAEAEA;
+            border-radius: 5px;
+            box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .submit-button {
+            margin: 0;
+        }
+
+        .wrap-cmt {
+            background-color: white;
+            border-color: #EAEAEA;
+            border-radius: 5px;
+            box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+
+        .name_post{
+            width: 700px;
+        }
+
+    </style>
+
+</head>
+
+<body style="background-color: rgb(250, 250, 250);">
+
+<div class="navigation">
+    <div class="wrap-content-nav">
+        <div class="wrap-icon-text">
+            <div>
+                <img src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534420005_08dcdd6cfb1da3bbd58ccc7998f00f79.jpg?alt=media&token=706f832f-fd7a-4880-95bf-9bc0354c2e7b"
+                     alt="" width="25" height="29">
+            </div>
+            <div>
+                <h2><strong>BDĐHNT</strong></h2>
+            </div>
+        </div>
+        <div class="wrap-btn">
+            <!-- Button trigger modal -->
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                    class="fa-solid fa-circle-plus"></i> <strong style="font-weight: bold">Đăng Bài</strong>
+            </button>
+
+            <div class="avt_func">
+                <div class="d-flex align-items-center">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534439426_12e9a1d7d2b51721634af3d654e8c21b.jpg?alt=media&token=6fa5eb7d-4293-4552-b680-c8951492269d"
+                         alt="Avatar">
+                    <i style="margin-left: 15px" class="fa-solid fa-caret-down"></i>
+                </div>
+                <div class="wrap-drop-personal">
+                    <a th:href="@{/user/showMylistBlog}"><i class="fa-regular fa-user"></i> Thông tin cá nhân</a>
+                    <a th:href="@{/login}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="Sidebar">
+    <div class="content-menu">
+        <div style="margin: 30px 0; padding-left: 90px">
+            <form method="get" th:action="@{/searchBlog}">
+                <button type="submit" style="border: none;background-color: white;color: black;font-size: 15px"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <input class="ip-text" type="text" name="inputSearch" placeholder="Tìm kiếm...">
+            </form>
+        </div>
+        <div class="">
+            <h4 style="padding: 15px 0 15px 90px;border-top: 1px solid #EAEAEA"><strong>MENU</strong></h4>
+            <div class="item-menu">
+                <div class="menu-task">
+                    <i class="fa-solid fa-house" style="margin-right: 10px"></i>
+                    <a th:href="@{/showListBlog}"><strong>Trang Chủ</strong></a>
+                </div>
+
+
+                <div class="menu-task" onclick="toggleDropdown('dropdown-1')">
+                    <i class="fa-solid fa-tag" style="margin-right: 10px"></i>
+                    <p><strong>Chủ Đề</strong></p>
+                </div>
+                <div id="dropdown-1" class="dropdown-content">
+                    <div th:each="c,loop: ${category}">
+                        <a th:href="@{{id}/searchByCategory(id=${c.id})}" th:text="${c.getName()}"></a>
+                    </div>
+                </div>
+
+
+                <div class="menu-task" onclick="toggleDropdown('dropdown-2')">
+                    <i class="fa-solid fa-file-signature" style="margin-right: 10px"></i>
+                    <p><strong>Chức Năng Cá Nhân</strong></p>
+                </div>
+                <div id="dropdown-2" class="dropdown-content">
+                    <div>
+                        <a th:href="@{/user/showMyLikedBlog}">Bài Viết Đã Thích</a>
+                    </div>
+                    <div>
+                        <a  th:href="@{/user/showMyBookmark}">Bài Viết Đã Đánh Dấu</a>
+
+                    </div>
+                </div>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <div class="menu-task" onclick="toggleDropdown('dropdown-3')">
+                        <i class="fa-solid fa-user-tie"  style="margin-right: 10px"></i>
+                        <p><strong>Chức Năng Admin
+                            <div th:if="${!listDuyetBai.isEmpty()}">
+                                <i class="fa-regular fa-bell" style="color: red; margin-left: 5px"></i>
+                            </div>
+                        </strong></p>
+                    </div>
+                    <div id="dropdown-3" class="dropdown-content">
+                        <div>
+                            <a  th:href="@{/user/showList}">Danh Sách Người Dùng</a>
+                        </div>
+                        <div>
+                            <a th:href="@{/showDuyetBai}">Duyệt Bài Viết
+                                <div th:if="${!listDuyetBai.isEmpty()}">
+                                    <span style="color: red" class="badge" th:text="${listDuyetBai.size()}"></span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="icon-contact">
+        <a href="">
+            <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="">
+            <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    </div>
+</div>
+
+
+<div class="Post">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/showListBlog}" style="color: #F48023">Trang Chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Bài Viết Chi Tiết</li>
+        </ol>
+    </nav>
+    <div class="wrap-post">
+        <div class="d-flex flex-column justify-content-center">
+            <div class="main-post">
+                <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 20px">
+                    <strong><h3 class="name_post" th:text="${blog.name}"></h3></strong>
+                    <div class="d-flex justify-content-between" style="width: 165px">
+                        <p style="color: #808080" th:text="${blog.formatDate()}"></p>
+                        <div>
+                            <div th:if="${userBlog.email == blog.user.email}">
+                                <i class="fa-regular fa-circle-xmark" type="button" data-toggle="modal"
+                                   data-target="#exampleModalDelete"
+                                   th:data-id="${blog.id}" th:data-title="${blog.name}"
+                                   th:onclick="deleteInfoDeleteBlog(this.getAttribute('data-id'),this.getAttribute('data-title'))">
+
+                                </i>
+                            </div>
+                            <div sec:authorize="hasRole('ADMIN')">
+                                <div th:if="${userBlog.email != blog.user.email}">
+                                    <i class="fa-regular fa-circle-xmark" type="button" data-toggle="modal"
+                                       data-target="#exampleModalDelete"
+                                       th:data-id="${blog.id}" th:data-title="${blog.name}"
+                                       th:onclick="deleteInfoDeleteBlog(this.getAttribute('data-id'),this.getAttribute('data-title'))">
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="content-post">
+                    <p th:text="${blog.type}"></p>
+                </div>
+                <div class="wrap-item-post d-flex justify-content-between align-items-center">
+                    <div class="">
+                        <div>
+                            <p class="st_cate" th:text="${blog.getCategory().name}"></p>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="icon-number">
+                            <div th:if="${!likes}">
+                                <a th:href="@{/{idBlog}/{idUser}/likeBlog(idUser = ${userBlog.id}, idBlog = ${blog.id})}">
+                                    <i class="fa-solid fa-heart st-i-func"></i>
+                                </a>
+                            </div>
+                            <div th:if="${likes}">
+                                <a th:href="@{/{idBlog}/{idUser}/deleteLikeBlog(idUser = ${userBlog.id}, idBlog = ${blog.id})}">
+                                    <i class="fa-solid fa-heart st-i-func" style="color: #ff5722"></i>
+                                </a>
+                            </div>
+                            </div>
+
+                        <div class="icon-number">
+                            <div th:if="${!checkBookmark}">
+                                <a th:href="@{/{idBlog}/{idUser}/bookmarkBlog(idUser = ${userBlog.id}, idBlog = ${blog.id})}">
+                                    <i class="fa-solid fa-bookmark st-i-func" id="liveToastBtn"></i>
+                                </a>
+                            </div>
+                            <div th:if="${checkBookmark}">
+                                <a th:href="@{/{idBlog}/{idUser}/deleteBookmarkBlog(idUser = ${userBlog.id}, idBlog = ${blog.id})}">
+                                    <i class="fa-solid fa-bookmark st-i-func" style="color: #ff5722"></i>
+                                </a>
+                            </div>
+                        </div>
+
+<!--                        FIX REPORT-->
+                        <div class="icon-number">
+                            <i style="cursor: pointer" class="fa-solid fa-flag st-i-func" data-bs-toggle="modal" data-bs-target="#report"></i>
+                        </div>
+                        <div class="icon-number">
+                            <a href="https://www.facebook.com">
+                                <i class="fa-solid fa-share st-i-func"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-comment">
+                <h3 style="color: #808080; text-align: center; margin-bottom: 10px">Bình Luận</h3>
+                <div class="main_post_comment">
+                    <form method="post" th:action="@{/postComment}">
+                        <div class="mb-3">
+                            <input name="id" th:value="${blog.id}" hidden="hidden">
+                            <input name="idUser" th:value="${userBlog.getId()}" hidden="hidden">
+                            <textarea class="form-control" name="comment" id="commentContent" rows="3" required
+                                      placeholder="Nhập bình luận..."></textarea>
+                        </div>
+                        <button type="submit" class="btn submit-button" style="margin: 0;"><i
+                                class="fa-regular fa-message"></i> Đăng
+                        </button>
+                    </form>
+                </div>
+
+                <div th:each="c,loop : ${comment}" th:if="${c.blog.id == blog.id}">
+                    <div class="wrap-cmt">
+                        <div class="comment">
+                            <div class="user-info d-flex justify-content-between">
+                                <div>
+                                    <p style="color: #ff5722;" th:text="${c.user.email}"><strong></strong></p>
+                                    <p class="comment-time" style="color: #bdb8b8; font-size: 12px" th:text="${c.getDateTime()}"></p>
+                                </div>
+                                <div sec:authorize="hasRole('ADMIN')">
+<!--                                                        <div th:if="${userBlog.email == blog.user.email}">-->
+                                    <i class="fa-regular fa-circle-xmark" type="button" data-toggle="modal"
+                                       data-target="#exampleModalCMT"
+                                       th:data-id="${c.id}" th:data-idBlogg="${c.blog.getId()}"
+                                       th:onclick="deleteInfo(this.getAttribute('data-id'),this.getAttribute('data-idBlogg'))"></i>
+
+                                    <!--                                                        </div>-->
+                                </div>
+                                <div sec:authorize="hasRole('USER') and !hasRole('ADMIN')">
+                                    <div th:if="${c.user.email == userBlog.email}">
+                                            <i class="fa-regular fa-circle-xmark" type="button" data-toggle="modal"
+                                               data-target="#exampleModalCMT"
+                                               th:data-id="${c.id}" th:data-idBlogg="${c.blog.getId()}"
+                                               th:onclick="deleteInfo(this.getAttribute('data-id'),this.getAttribute('data-idBlogg'))"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="comment-text" th:text="${c.content}"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="main-info-author">
+            <img src="https://firebasestorage.googleapis.com/v0/b/photo-archive-a0523i1.appspot.com/o/imgLanding%2Fz5572534439426_12e9a1d7d2b51721634af3d654e8c21b.jpg?alt=media&token=6fa5eb7d-4293-4552-b680-c8951492269d"
+                 alt="">
+            <h4 style="padding: 10px 40px; border-bottom: 1px solid darkgrey"><strong th:text="${userBlog.getEmail()}"></strong></h4>
+            <div class="d-flex justify-content-center align-items-center st_info_icon">
+                <a href="">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Modal Report-->
+<div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2  class="modal-title" id="reportModal">BÁO CÁO</h2>
+            </div>
+            <div class="modal-body">
+                <h3>
+                    Hãy chọn vấn đề:
+                </h3>
+                <form>
+                    <div class="d-flex flex-column">
+                        <div class="form-check">
+                            <input class="form-check-input " type="radio" name="status" id="0">
+                            <label class="form-check-label" for="0">Bài đăng, bình luận hoặc nội dung khác mà người dùng cho là không phù hợp hoặc gây phản cảm.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="1">
+                            <label class="form-check-label" for="1">Nội dung spam, quảng cáo không phù hợp hoặc vi phạm các quy định về quảng cáo trên diễn đàn.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="2">
+                            <label class="form-check-label" for="2">Hành vi quấy rối, phân biệt đối xử hoặc gây phiền hà đối với bản thân hoặc thành viên khác trong cộng đồng.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="3">
+                            <label class="form-check-label" for="3">Bài đăng hoặc thông tin không chính xác, thiếu chính xác hoặc tin giả được chia sẻ trên diễn đàn.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="4">
+                            <label class="form-check-label" for="4">Hoạt động hoặc nội dung vi phạm pháp luật, bao gồm vi phạm bản quyền, lạm dụng trẻ em hoặc nội dung liên quan đến tội phạm.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="5">
+                            <label class="form-check-label" for="5">Bài đăng hoặc bình luận sử dụng ngôn ngữ không tôn trọng, châm biếm hoặc kích động.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="6">
+                            <label class="form-check-label" for="6">Hành vi lạm dụng tài khoản hoặc gian lận, bao gồm việc sử dụng tài khoản giả mạo hoặc hack tài khoản.</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn " data-bs-dismiss="modal">Xác Nhận</button>
+                        <button type="button" class="btn " data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Dang Bai-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered st_modal">
+        <div class="modal-content st_modal_content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"
+                    style="text-align: center;font-weight: bolder">NHẬP THÔNG TIN CẦN ĐĂNG</h1>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/createBlog}" th:object="${blog}" method="post">
+                    <input type="hidden" value="0" th:field="*{viewBlog}">
+                    <div class="mb-3">
+                        <label for="inputCate" class="form-label">Chủ đề:</label>
+                        <select class="form-select" th:field="*{category}" id="inputCate">
+                            <option value="">--Chọn chủ đề--</option>
+                            <option th:each="p : ${categoryList}" th:value="${p.id}"
+                                    th:text="${p.name}"></option>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="inputName" class="form-label">Tiêu đề:</label>
+                        <input type="text" class="form-control" th:field="*{name}" id="inputName">
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputContent" class="form-label">Nội dung:</label>
+                        <textarea rows="17" class="form-control" th:field="*{type}"
+                                  id="inputContent"></textarea>
+                        <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="text-danger"></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn">Đăng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Delete Comment-->
+<div class="modal fade" id="exampleModalCMT" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelCMT">
+    <div class="modal-dialog" role="document">
+        <form action="/deleteComment" method="get">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelCMT"><b>XOÁ COMMENT</b></h5>
+                </div>
+                <div class="modal-body">
+                    <input name="idComment" id="idComment" hidden="hidden">
+                    <input name="idBlog" id="idBlog" hidden="hidden">
+                    <p>Xác nhận xóa ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Xác Nhận</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--Delete Blog -->
+<div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDelete"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="/delete" method="get">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelDelete"><b>XÁC NHẬN XOÁ</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input hidden name="id" id="id">
+                    <span>Bạn có muốn xoá </span><span id="deleteName"></span><span>?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn ">Xác Nhận</button>
+                    <button type="button" class="btn " data-dismiss="modal">Đóng</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function toggleDropdown(id) {
+        var dropdown = document.getElementById(id);
+        if (dropdown.style.display === "none" || dropdown.style.display === "") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+    function deleteInfo(idComment, idBlog) {
+        document.getElementById("idComment").value = idComment;
+        document.getElementById("idBlog").value = idBlog;
+    }
+
+    function deleteInfoDeleteBlog(id, title) {
+        document.getElementById("id").value = id;
+        document.getElementById("deleteName").innerText = title;
+    }
+</script>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
